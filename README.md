@@ -12,4 +12,4 @@ Currently, two official plugins are available:
 ![Screenshot 2024-02-04 at 17 07 43](https://github.com/irfannurzaman/bvk/assets/52403294/4f87ba14-7589-4549-a805-39da567d65c2)
 ![Screenshot 2024-02-04 at 17 07 59](https://github.com/irfannurzaman/bvk/assets/52403294/677434e5-fa96-4eb8-8e70-b663aaf89b36)
 ![Screenshot 2024-02-04 at 17 08 08](https://github.com/irfannurzaman/bvk/assets/52403294/359ccc58-2e82-407d-845d-0fe56bbf2f36)
-![Uploading Screenshot 2024-02-04 at 17.08.19.png…]()
+![Screenshot 2024-02-04 at 17 08 19](https://github.com/irfannurzaman/bvk/assets/52403294/c0c1a70b-039c-41b5-8e89-14d4103e830e)
