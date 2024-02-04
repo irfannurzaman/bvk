@@ -61,6 +61,7 @@ export const getListApi = async (dispatch) => {
 export const getDataFavorite = async (dispatch) => {
     try {
         const dataFavorite = await getListFavorite()
+        dataFavorite.reverse()
         localStorage.setItem("film_favorite", JSON.stringify(dataFavorite))
         dispatch({
             type: SET_FAVORITE,
