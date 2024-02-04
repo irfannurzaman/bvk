@@ -24,6 +24,10 @@ export const Inner = styled.div`
   iframe {
     height: 500px;
     width: 100%;
+    @media (max-width: 600px) {
+      height: 250px;
+      width: 90%;
+    }
   }
 `;
 
