@@ -19,9 +19,6 @@ Player.Video = function PlayerVideo({ src, ...restProps }) {
   const { showPlayer, setShowPlayer } = useContext(PlayerContext);
   const { itemFeature } = useContext(FeatureContext);
 
-
-  console.log("itemFeature", itemFeature);
-
   return showPlayer
     ? ReactDOM.createPortal(
         <Overlay onClick={() => setShowPlayer(false)} data-testid="player">
