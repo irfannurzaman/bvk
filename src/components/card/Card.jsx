@@ -78,9 +78,10 @@ Card.Meta = function CardMeta({ children, ...restProps }) {
 export const showDetailMovie = async ({
   id,
   setItemFeature,
-  setLoading
+  setLoading,
+  load = true
 }) => {
-    setLoading(true)
+    setLoading(load)
     const { loading, response} = await getMovieDetail(id)
     setItemFeature(response); 
     setLoading(loading)     
@@ -118,7 +119,7 @@ Card.ImageFavorite = function CardImageFavorite({ ...restProps }) {
 };
 
 Card.Feature = function CardFeature({ children, category, genres, ...restProps }) {
-  const { showFeature, itemFeature, setShowFeature, setItemFeature, loading } = useContext(FeatureContext);
+  const { showFeature, itemFeature, setShowFeature, setItemFeature, loading,  setLoading } = useContext(FeatureContext);
   const { dispatch } = useContext(AppContext.Context)
 
   const onClickAddFavorite = () => {
@@ -128,7 +129,9 @@ Card.Feature = function CardFeature({ children, category, genres, ...restProps }
     }).then((res) => {
       showDetailMovie({
         id: itemFeature.id,
-        setItemFeature
+        setItemFeature,
+        setLoading,
+        load: false
       })
       getDataFavorite(dispatch)
     })
