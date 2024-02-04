@@ -7,9 +7,11 @@ export default class apiMovieList extends baseRequest {
         this.urlNowPlaying = 'movie/now_playing?language=en-US&page=1'
         this.urlMovieDetail = 'movie/'
         this.urlSearchMovie = 'search/movie?query='
+        this.urlKeyword = 'search/keyword?query='
     }
 
     nowPlaying = () => this.get(this.urlNowPlaying)
     movieDetail = (id) => this.get(this.urlMovieDetail + id)
     searchMovie = (name_movies) => this.get(this.urlSearchMovie + name_movies)
+    keyword = (keyword) => this.get(this.urlKeyword + keyword + '&page=1')
 }

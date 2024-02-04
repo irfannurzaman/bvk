@@ -65,6 +65,7 @@ export const Group = styled.div`
   align-items: center;
 `;
 
+
 export const SearchInput = styled.input`
   background-color: rgba(64, 64, 64, 0.5);
   color: white;
@@ -178,13 +179,14 @@ export const Picture = styled.button`
 `;
 
 export const Dropdown = styled.div`
-  display: none;
+  display: ${({searchTerm}) => searchTerm ? "block" : "none"};
   position: absolute;
   background-color: black;
   padding: 10px;
-  width: 100px;
-  top: 32px;
-  right: 10px;
+  width: 204px;
+  top: 66px;
+  right: 7%;
+  
 
   ${Group}:last-of-type ${Link} {
     cursor: pointer;
@@ -219,7 +221,7 @@ export const Dropdown = styled.div`
 
 
 export const ContainerOnline = styled.div`
-      height: 44px;
+  height: 44px;
   position: relative;
 `
 
@@ -233,11 +235,6 @@ export const Profile = styled.div`
 
   button {
     cursor: pointer;
-  }
-
-  &:hover > ${Dropdown} {
-    display: flex;
-    flex-direction: column;
   }
 `;
 

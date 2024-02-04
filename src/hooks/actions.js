@@ -107,3 +107,13 @@ export const searchMovies = async ({ dispatch, searchTerm }) => {
         console.log(error);
     }
 }
+
+export const keywordMovies = async (searchTerm) => {
+    try {
+        const response = await api.movieList.keyword(searchTerm)
+        return response.results
+    } catch (error) {
+        return []
+        console.log(error);
+    }
+}

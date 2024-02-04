@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext } from 'react';
+import React, { useState, useContext, createContext, useEffect } from 'react';
 import { Link as ReachRouterLink } from 'react-router-dom';
 import { FaHeart } from "react-icons/fa";
 import {
@@ -25,7 +25,7 @@ import {
 import AppContext from "../../context/Context";
 import useNetwork from '../../hooks/use-network';
 import { logo } from "../../utils/url";
-import { searchMovies } from "../../hooks/actions";
+import { searchMovies, keywordMovies } from "../../hooks/actions";
 
 export const DrawerContext = createContext();
 
@@ -93,9 +93,10 @@ Header.Favorite = function HeaderFavorite({ ...restProps }) {
   
 }
 
-Header.Search = function HeaderSearch({ ...restProps }) {
+Header.Search = function HeaderSearch({children, ...restProps }) {
   const [searchActive, setSearchActive] = useState(false);
   const [searchTerm, setSearchTerm] = useState('')
+  const [keyword, setKeyword] = useState([])
   const { dispatch } = useContext(AppContext.Context);
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
@@ -105,6 +106,18 @@ Header.Search = function HeaderSearch({ ...restProps }) {
       })
     }
   }
+
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(async () => {
+      const response = await keywordMovies(searchTerm)
+      setKeyword(response || [])
+      // Send Axios request here
+    }, 1000)
+
+    return () => clearTimeout(delayDebounceFn)
+  }, [searchTerm])
+
 
   return (
     <Search {...restProps}>
@@ -119,6 +132,25 @@ Header.Search = function HeaderSearch({ ...restProps }) {
         data-testid="search-input"
         onKeyDown={handleKeyDown}
       />
+      {
+        keyword.length > 0 && (
+          <Header.Dropdown searchTerm={searchTerm}>
+            { keyword?.map(item => (
+                <Header.Group>
+                <Header.TextLink onClick={() => {
+                    searchMovies({
+                      searchTerm : item.name,
+                      dispatch
+                    })
+                  setSearchTerm('')
+                  setSearchActive(false)
+                  }}>{item.name}</Header.TextLink>
+                </Header.Group>  
+                ))
+            }
+          </Header.Dropdown>
+        )
+      }
     </Search>
   );
 };
