@@ -95,6 +95,10 @@ Header.Favorite = function HeaderFavorite({ ...restProps }) {
 
 Header.Search = function HeaderSearch({children, ...restProps }) {
   const [searchActive, setSearchActive] = useState(false);
+  const [dropwdown, setDropwdown] = useState({
+    value: false,
+    type: false
+  });
   const [searchTerm, setSearchTerm] = useState('')
   const [keyword, setKeyword] = useState([])
   const { dispatch } = useContext(AppContext.Context);
@@ -109,6 +113,17 @@ Header.Search = function HeaderSearch({children, ...restProps }) {
 
 
   useEffect(() => {
+    if (searchTerm && !dropwdown.type) {
+      setDropwdown({
+        value: true,
+        type: false
+      })
+    } else {
+      setDropwdown({
+        value: false,
+        type: false
+      })
+    }
     const delayDebounceFn = setTimeout(async () => {
       const response = await keywordMovies(searchTerm)
       setKeyword(response || [])
@@ -134,16 +149,19 @@ Header.Search = function HeaderSearch({children, ...restProps }) {
       />
       {
         keyword.length > 0 && (
-          <Header.Dropdown searchTerm={searchTerm}>
+          <Header.Dropdown searchTerm={dropwdown.value}>
             { keyword?.map(item => (
                 <Header.Group>
                 <Header.TextLink onClick={() => {
+                    setDropwdown({
+                      value: false,
+                      type: true
+                    })
+                    setSearchTerm(item.name)
                     searchMovies({
                       searchTerm : item.name,
                       dispatch
                     })
-                  setSearchTerm('')
-                  setSearchActive(false)
                   }}>{item.name}</Header.TextLink>
                 </Header.Group>  
                 ))
