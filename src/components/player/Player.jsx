@@ -1,6 +1,7 @@
 import React, { useState, useContext, createContext } from 'react';
 import ReactDOM from 'react-dom';
 import { Container, Button, Overlay, Inner, Close } from './styles';
+import { FeatureContext } from "../card/Card"
 
 export const PlayerContext = createContext();
 
@@ -16,6 +17,10 @@ export default function Player({ children, ...restProps }) {
 
 Player.Video = function PlayerVideo({ src, ...restProps }) {
   const { showPlayer, setShowPlayer } = useContext(PlayerContext);
+  const { itemFeature } = useContext(FeatureContext);
+
+
+  console.log("itemFeature", itemFeature);
 
   return showPlayer
     ? ReactDOM.createPortal(
@@ -24,7 +29,7 @@ Player.Video = function PlayerVideo({ src, ...restProps }) {
             <iframe className='video'
               title='Youtube player'
               sandbox='allow-same-origin allow-forms allow-popups allow-scripts allow-presentation'
-              src={`https://youtube.com/embed/${src}?autoplay=0`}>
+              src={`https://youtube.com/embed/${itemFeature.key_youtube}?autoplay=0`}>
             </iframe>
 
             {/* <video id="netflix-player" controls>

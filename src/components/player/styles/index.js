@@ -22,7 +22,7 @@ export const Inner = styled.div`
   margin: auto;
 
   iframe {
-    height: 100%;
+    height: 500px;
     width: 100%;
   }
 `;

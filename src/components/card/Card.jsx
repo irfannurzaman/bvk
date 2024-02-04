@@ -24,6 +24,7 @@ import { addFavorite, getMovieDetail, getDataFavorite } from "../../hooks/action
 import AppContext from "../../context/Context";
 import Loading from '../loading/Loading';
 import { urlImage, urlYoutube } from "../../utils/url"
+import api from '../../request';
 
 
 export const FeatureContext = createContext();
@@ -83,6 +84,8 @@ export const showDetailMovie = async ({
 }) => {
     setLoading(load)
     const { loading, response} = await getMovieDetail(id)
+    const idYoutube = await api.movieList.playYoutube(id)
+    response['key_youtube'] = idYoutube.results[0]['key']
     setItemFeature(response); 
     setLoading(loading)     
   }

@@ -12,6 +12,7 @@ import { HeaderContainer } from "./Header/";
 import { ListFavoriteContiner } from "./ListFavorite";
 
 
+
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
